@@ -11,39 +11,38 @@ datasource db {
 }
 
 model Doctor {
-  id          Int @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
-  email       String @unique
-  fone        Int @unique
+  imgUrl      String
+  description String?   @default("")
+  email       String    @unique
+  phoneNumber Int       @unique
   clinic      String
-  queryValue  Int
+  queryValue  String
   dates       DateTime
   specialty   Specialty @relation(fields: [specialtyId], references: [id])
   specialtyId Int
   users       User[]
 
-
-@@map("doctors")
+  @@map("doctors")
 }
 
 model Specialty {
-  id          Int @id @default(autoincrement())
-  specialty   String
-  doctors     Doctor[]
+  id        Int      @id @default(autoincrement())
+  specialty String
+  doctors   Doctor[]
 
-
-@@map("specialties")
+  @@map("specialties")
 }
 
 model User {
-  id          Int @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   name        String
   email       String @unique
-  fone        Int @unique
-  cpf         Int @unique
+  phoneNumber Int    @unique
+  cpf         Int    @unique
   doctor      Doctor @relation(fields: [doctorId], references: [id])
   doctorId    Int
 
-
-@@map("users")
+  @@map("users")
 }
