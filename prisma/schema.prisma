@@ -16,7 +16,7 @@ model Doctor {
   imgUrl      String
   description String?   @default("")
   email       String    @unique
-  phoneNumber Int       @unique
+  phoneNumber String    @unique
   clinic      String
   queryValue  String
   dates       DateTime
@@ -39,8 +39,9 @@ model User {
   id          Int    @id @default(autoincrement())
   name        String
   email       String @unique
-  phoneNumber Int    @unique
-  cpf         Int    @unique
+  phoneNumber String @unique
+  cpf         String @unique
+  password    String @unique
   doctor      Doctor @relation(fields: [doctorId], references: [id])
   doctorId    Int
 
